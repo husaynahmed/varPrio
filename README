@@ -1,6 +1,6 @@
 ##############################################
 ############# v a r P r i o 0.4 ##############
-############# 	 README	  ############## 
+############# 	   README  	############## 
 ##############################################
 
 #####################################################################
@@ -10,7 +10,7 @@
 ### predictions of damaging mutations and based on occurrence or  ###
 ### frequency across pedigrees and in the population. varPrio is  ###
 ### developed as part of the The Accelerator program for Discovery###
-### in Brain disorders using Stem cells (ADBS) at NCBS. 	      ###
+### in Brain disorders using Stem cells (ADBS) at NCBS. 	  ###
 ### Please read the README file before using this program.        ###
 #####################################################################
 
@@ -172,16 +172,21 @@ Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.re
 Contact
 ###############################################################
 For technical queries, please write to husaynp@ncbs.res.in
-
+or post comments on https://github.com/husaynahmed/varPrio
 
 
 ###############################################################
 Contributors
 ###############################################################
 Developed by: Husayn Ahmed P 
+
 Conceptualized by: Suhas Ganesh, Husayn Ahmed P, Odity Mukherjee
 
+Developed for:
+The Accelerator program for Discovery in Brain disorders using Stem cells (ADBS)
+National Centre for Biological Sciences - Tata Institute of Fundamental Research (NCBS-TIFR)
+Bangalore 560065,Karnataka,India
 
-
+######################################################################################
 ######################################################################################
 
