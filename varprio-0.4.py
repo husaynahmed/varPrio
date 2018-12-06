@@ -13,12 +13,12 @@
 ### predictions of damaging mutations and based on occurrence or  ###
 ### frequency across pedigrees and in the population. varPrio is  ###
 ### developed as part of the The Accelerator program for Discovery###
-### in Brain disorders using Stem cells (ADBS) at NCBS. 	      ###
-### This program is tailor-made for large-scale analysis of 	###
-### pedigrees recruited in ADBS. The input formats recognized by 	###
-### this tool is based on the files generated in ADBS. This tool	###
-### is not generalized to read any type of annotated VCFs.  	###
-### Please read the README file before using this program. 		###
+### in Brain disorders using Stem cells (ADBS) at NCBS. 	  ###
+### This program is tailor-made for large-scale analysis of 	  ###
+### pedigrees recruited in ADBS. The input formats recognized by  ###
+### this tool is based on the files generated in ADBS. This tool  ###
+### is not generalized to read any type of annotated VCFs.  	  ###
+### Please read the README file before using this program. 	  ###
 #####################################################################
 
 # packages import
