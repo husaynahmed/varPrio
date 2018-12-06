@@ -1,0 +1,6 @@
+#sampleID	PedigreeID	Full_path_to_the_variant_file
+sample1	ped1	/home/husayn/Desktop/VARPRIO/varPrio-0.4_github/example_files/sample1_snp.txt
+sample2	ped1	/home/husayn/Desktop/VARPRIO/varPrio-0.4_github/example_files/sample2_snp.txt
+sample3	ped1	/home/husayn/Desktop/VARPRIO/varPrio-0.4_github/example_files/sample3_snp.txt
+sample4	ped1	/home/husayn/Desktop/VARPRIO/varPrio-0.4_github/example_files/sample4_snp.txt
+

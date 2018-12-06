@@ -1,0 +1,187 @@
+##############################################
+############# v a r P r i o 0.4 ##############
+############# 	 README	  ############## 
+##############################################
+
+#####################################################################
+### varPrio is a tool for the prioritization of genetic variants  ###
+### from WES/WGS data. Variants which are relevant and associated ###
+### to the disease phenotype are prioritized based on in silico   ###
+### predictions of damaging mutations and based on occurrence or  ###
+### frequency across pedigrees and in the population. varPrio is  ###
+### developed as part of the The Accelerator program for Discovery###
+### in Brain disorders using Stem cells (ADBS) at NCBS. 	      ###
+### Please read the README file before using this program.        ###
+#####################################################################
+
+
+
+###############################################################
+Requirements:
+###############################################################
+=> python version 2.7
+=> python packages NumPy, pandas, os, glob, argparse 
+	To install them, use "sudo pip install numpy pandas os glob argparse"
+
+###############################################################
+USAGE:
+###############################################################
+usage: varprio-0.4.py [-h] -T {snp,indel} -I INPUTFILEINFO -PC
+                      POPULATIONCONTROL -AFC ALLFAMILYCONTROL -O OUTDIR
+
+varPrio version 0.4
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -T {snp,indel}, --typeofvariant {snp,indel}
+                        Type of variant to prioritize {snp,indel}
+  -I INPUTFILEINFO, --inputfileinfo INPUTFILEINFO
+                        Path to the text file containing 3 rows. 1st row -
+                        Sample identifier of the affected individuals; 2nd row
+                        - Family identifier; 3rd row - Path to the annotated
+                        file (ANNOVAR tab delimmited TXT files).
+  -PC POPULATIONCONTROL, --populationcontrol POPULATIONCONTROL
+                        Path to population control variant data file.
+  -AFC ALLFAMILYCONTROL, --allfamilycontrol ALLFAMILYCONTROL
+                        Path to all familial control variant data file of
+                        multiple families.
+  -O OUTDIR, --outdir OUTDIR
+                        Path to the output directory where the varprio results
+                        will be written.
+
+Please give absolute(full) path to all the files. 
+
+Note: vpr format is the varPrio format just to distinguish the varPrio results from other files.  
+
+
+###############################################################
+How to Cite?
+###############################################################
+Please cite the following article:
+
+Suhas Ganesh,  Husayn Ahmed P,  Ravi K Nadella, Ravi P More, Manasa Sheshadri, Biju Viswanath, Mahendra Rao, Sanjeev Jain, The ADBS consortium, Odity Mukherjee. 2018. Exome sequencing in families with severe mental illness identifies novel and rare variants in genes implicated in Mendelian neuropsychiatric syndromes. Psychiatry and Clinical Neurosciences. doi: 10.1111/pcn.12788
+
+
+###############################################################
+LICENSE
+###############################################################
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+###############################################################
+How does varPrio work?
+###############################################################
+
+varPrio is a tool for the prioritization of genetic variants from whole genome/exome sequencing data of pedigrees.
+
+Variants are prioritized if – 
+
+(a) the variant is found to be shared by all affected individuals within the pedigree while allowing for one missing genotype;
+ 
+(b) the variant fell into any of the following deleterious categories – Non-Synonymous Damaging Strict (NSD-S) set predicted to be damaging by 5 prediction algorithms - SIFT (Kumar et al., 2009), Polyphen-2 HDIV (Adzhubei et al., 2010), Mutation taster2 (Schwarz et al., 2014), Mutation assessor (Reva et al., 2011) and LRT (Chun and Fay, 2009); Disruptive set predicted to result in protein truncation (splice site, stop gain or stop loss variants) or Non-Synonymous Damaging Broad (NSD-B) set predicted to be damaging by one or more of the above stated 5 prediction algorithms;
+
+Indels are prioritized if they are frameshift insertion/deletion, stopgain or stoploss.
+
+The information about the presence/absence and frequency of the variant in the population control information provided will be added to the final prioritized files.
+
+
+###############################################################
+Instructions
+###############################################################
+
+0. The folder "example_files" contains a set of input files in the required format for varPrio. The variants file contain variants only from chromosome 19 as an example. This folder also contains output files generated by varPrio.
+	
+1. Create a file detailing the information about input variant files (INPUTFILEINFO)
+	This file contains 3 rows. 1st row - Sample identifier of the affected individuals; 2nd row - Family identifier; 3rd row - Path to the annotated file (ANNOVAR tab delimmited TXT files). This program is tailor-made for large-scale analysis of pedigrees recruited in ADBS. The input formats recognized by this tool is based on the files generated in ADBS. This tool is not generalized to read any type of annotated VCFs. 
+
+2. Provide counts of variants in population controls and familial controls (POPULATIONCONTROL and ALLFAMILYCONTROL)
+	These files 3 rows: chr, pos and count
+
+3. Create output directory in which you need varPrio to write the results to.
+
+
+
+
+###############################################################
+Example commands
+###############################################################
+
+mkdir ./example_files/output_snp
+mkdir ./example_files/output_indel
+
+python varprio-0.4.py -T snp \
+	-I /home/husayn/varPrio-0.4/example_files/input_info_snp.txt \
+	-PC /home/husayn/varPrio-0.4/example_files/INDEX-db_phase1_snp_population_control_chr19.txt \
+	-AFC /home/husayn/varPrio-0.4/example_files/All_fam_control_count.txt \
+	-O /home/husayn/varPrio-0.4/example_files/output_snp 
+
+python varprio-0.4.py -T indel \
+	-I /home/husayn/varPrio-0.4/example_files/input_info_indel.txt \
+	-PC /home/husayn/varPrio-0.4/example_files/INDEX-db_phase1_indel_population_control_chr19.txt \
+	-AFC /home/husayn/varPrio-0.4/example_files/All_fam_control_count.txt \
+	-O /home/husayn/varPrio-0.4/example_files/output_indel 
+
+
+###############################################################
+Output files
+###############################################################
+
+	=> Results of every step is written to a separate file. This helps in customizing prioritization approach as per the requirement.
+	=> In the case of SNP, the final files are "LIST2A_step3_1to5P_withPCAFC.vpr" and "LIST2B_step3_1to5P_withPCAFC.vpr". These contain prioritized variants as described above. 
+	=> Five new columns are added to the output files. These contain sampleID, pedigreeID, number of algorithms calling it damaging, occurrence/count in population controls and occurrence/count in familial controls respectively.
+	=> While the LIST2B contains all columns provided by the ANNOVAR annotation, LIST2A contains only selected columns required in the context of ADBS downstream analysis.
+	=> In the case of INDELs, "step2_prioritized_INDEL_LIST3.vpr" is the final prioritized list of variants. Three new columns are added in the output files, containing sampleID, pedigreeID, presence/absence in the population controls.
+
+Column headers of "LIST2B_step3_1to5P_withPCAFC.vpr":
+=============================================================
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	cytoBand	genomicSuperDups	esp6500siv2_all	1000g2015aug_all	1000g2015aug_eur	ExAC_ALL	ExAC_AFR	ExAC_AMR	ExAC_EAS	ExAC_FIN	ExAC_NFE	ExAC_OTH	ExAC_SAS	avsnp147	SIFT_score	SIFT_pred	Polyphen2_HDIV_score	Polyphen2_HDIV_pred	Polyphen2_HVAR_score	Polyphen2_HVAR_pred	LRT_score	LRT_pred	MutationTaster_score	MutationTaster_pred	MutationAssessor_score	MutationAssessor_pred	FATHMM_score	FATHMM_pred	PROVEAN_score	PROVEAN_pred	VEST3_score	CADD_raw	CADD_phred	DANN_score	fathmm-MKL_coding_score	fathmm-MKL_coding_pred	MetaSVM_score	MetaSVM_pred	MetaLR_score	MetaLR_pred	integrated_fitCons_score	integrated_confidence_value	GERP++_RS	phyloP7way_vertebrate	phyloP20way_mammalian	phastCons7way_vertebrate	phastCons20way_mammalian	SiPhy_29way_logOdds	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6	Otherinfo7	Otherinfo8	Otherinfo9	Otherinfo10	Otherinfo11	Otherinfo12	Otherinfo13	Sample_ID	Pedigree_ID	Predicted_deleterious_by	PC_Count	AFC_Count
+
+Column headers of "LIST2A_step3_1to5P_withPCAFC.vpr":
+=============================================================
+Chr	Start	Ref	Alt	Func.refGene	Gene.refGene	ExonicFunc.refGene	AAChange.refGene	1000g2015aug_all	ExAC_ALL	ExAC_SAS	avsnp147	SIFT_pred	Polyphen2_HDIV_pred	LRT_pred	MutationTaster_pred	MutationAssessor_pred	Sample_ID	Pedigree_ID	Predicted_deleterious_by	PC_Count	AFC_Count
+
+
+Column headers of "step2_prioritized_INDEL_LIST3.vpr":
+=============================================================
+Chr	Start	End	Ref	Alt	Func.refGene	Gene.refGene	GeneDetail.refGene	ExonicFunc.refGene	AAChange.refGene	cytoBand	genomicSuperDups	esp6500siv2_all	1000g2015aug_all	1000g2015aug_eur	ExAC_ALL	ExAC_AFR	ExAC_AMR	ExAC_EAS	ExAC_FIN	ExAC_NFE	ExAC_OTH	ExAC_SAS	avsnp147	SIFT_score	SIFT_pred	Polyphen2_HDIV_score	Polyphen2_HDIV_pred	Polyphen2_HVAR_score	Polyphen2_HVAR_pred	LRT_score	LRT_pred	MutationTaster_score	MutationTaster_pred	MutationAssessor_score	MutationAssessor_pred	FATHMM_score	FATHMM_pred	PROVEAN_score	PROVEAN_pred	VEST3_score	CADD_raw	CADD_phred	DANN_score	fathmm-MKL_coding_score	fathmm-MKL_coding_pred	MetaSVM_score	MetaSVM_pred	MetaLR_score	MetaLR_pred	integrated_fitCons_score	integrated_confidence_value	GERP++_RS	phyloP7way_vertebrate	phyloP20way_mammalian	phastCons7way_vertebrate	phastCons20way_mammalian	SiPhy_29way_logOdds	Otherinfo1	Otherinfo2	Otherinfo3	Otherinfo4	Otherinfo5	Otherinfo6	Otherinfo7	Otherinfo8	Otherinfo9	Otherinfo10	Otherinfo11	Otherinfo12	Otherinfo13	Sample_ID	Family	PC
+
+
+
+
+
+###############################################################
+Contact
+###############################################################
+For technical queries, please write to husaynp@ncbs.res.in
+
+
+
+###############################################################
+Contributors
+###############################################################
+Developed by: Husayn Ahmed P 
+Conceptualized by: Suhas Ganesh, Husayn Ahmed P, Odity Mukherjee
+
+
+
+######################################################################################
+
