@@ -1,7 +1,7 @@
 # v a r P r i o - version 0.4 
 
 ## Introduction
-varPrio is a tool for the prioritization of genetic variants from WES/WGS data. Variants which are relevant and associated to the disease phenotype are prioritized based on in silico predictions of damaging mutations and based on occurrence or frequency across pedigrees and in the population. varPrio is developed as part of the The Accelerator program for Discovery in Brain disorders using Stem cells (ADBS) at NCBS. Please read the README file before using this program.
+varPrio is a tool for the prioritization of genetic variants from WES/WGS data. Variants which are relevant and associated to the disease phenotype are prioritized based on in silico predictions of damaging mutations and based on occurrence or frequency across pedigrees and in the population. varPrio is developed as part of the Accelerator program for Discovery in Brain disorders using Stem cells (ADBS) at NCBS. Please read the README file before using this program.
 
 
 
